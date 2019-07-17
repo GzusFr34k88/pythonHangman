@@ -1,12 +1,17 @@
 import random
+#list of words
 ans = ["encourage", "ruthless", "gleaming", "balance", "endurable", "ring", "grateful", "quiver", "spoil", "scintillating", "bucket", "stupendous", "borrow", "border", "force", "geese", "lackadaisical", "art", "cruel", "cagey",
 "replace", "idea", "superb", "lumpy", "fanatical", "roll", "birthday", "grandmother", "pull", "check", "absurd", "willing", "wipe", "sail", "uptight", "price", "rake", "mom", "fertile", "load", "embarrassed", "lyrical", "worm", "erect", "present", "numerous", "addicted", "watery", "warm", "jump"]
+#Selects a random word from list(ans)
 ans = random.choice(ans)
+#makes a list of each letter in the word selected
 ans = list(ans)
+#player has 10 lives
 lives = 10
+#sets up correctGuess variable to declare if user guessed correctly or not
 correctGuess = False
+#create list for storing guesses
 alreadyGuessed = []
-incorrect = []
 correct = []
 play = True
 def hasGuessed(x, y):
@@ -42,7 +47,7 @@ def winner(x,y):
         else:
             return(False)
 def reset():
-    global ans, lives, correctGuess, alreadyGuessed, incorrect, correct
+    global ans, lives, correctGuess, alreadyGuessed, correct
     ans = ["encourage", "ruthless", "gleaming", "balance", "endurable", "ring", "grateful", "quiver", "spoil", "scintillating", "bucket", "stupendous", "borrow", "border", "force", "geese", "lackadaisical", "art", "cruel", "cagey",
     "replace", "idea", "superb", "lumpy", "fanatical", "roll", "birthday", "grandmother", "pull", "check", "absurd", "willing", "wipe", "sail", "uptight", "price", "rake", "mom", "fertile", "load", "embarrassed", "lyrical", "worm", "erect", "present", "numerous", "addicted", "watery", "warm", "jump"]
     ans = random.choice(ans)
@@ -50,7 +55,6 @@ def reset():
     lives = 10
     correctGuess = []
     alreadyGuessed = []
-    incorrect.clear()
     correct.clear()
     play = True
     for x in range(len(ans)):
@@ -76,6 +80,7 @@ while play:
                         correctGuess = True
                     if(correctGuess):
                         print("Correct!")
+                        print("You have guessed: %s" %(', '.join(alreadyGuessed)))
                         if (winner(ans, correct)):
                             print("YOU WIN!!! The word was %s" %(''.join(ans)))
                             print("Do you want to play again (Yes or No)?")
@@ -93,9 +98,8 @@ while play:
                     else:
                         lives -= 1
                         if lives == 1:
-                            incorrect.append(inpt)
                             print("Incorrect")
-                            print("You have guessed: %s" %(', '.join(incorrect)))
+                            print("You have guessed: %s" %(', '.join(alreadyGuessed)))
                         elif lives == 0:
                             print("Sorry, you lose. The word was %s." %(''.join(ans)))
                             print("Do you want to play again (Yes or No)?")
@@ -109,11 +113,10 @@ while play:
                                 else:
                                     inpt = input("Please enter yes or no: ")
                         else:
-                            incorrect.append(inpt)
                             print("Incorrect")
-                            print("You have guessed: %s" %(', '.join(incorrect)))
+                            print("You have guessed: %s" %(', '.join(alreadyGuessed)))
         else:
             print("You've already guessed that. Try again.")
-            print("You have guessed: %s" %(', '.join(incorrect)))
+            print("You have guessed: %s" %(', '.join(alreadyGuessed)))
     else:
         print("Please enter one letter per guess.")
